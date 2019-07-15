@@ -1,0 +1,29 @@
+spring:
+  devtools:
+    restart:
+      enabled: true
+      exclude: static/**, public/**
+    livereload:
+      enabled: true
+    add-properties: true
+  banner:
+    location: classpath:benner.txt
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+    open-in-view: true
+    database: mysql
+  thymeleaf:
+    prefix: classpath:templates/
+    suffix: .html
+    cache: false
+    check-template: true
+    check-template-location: true
+    enabled: true
+    encoding: UTF-8
+    mode: HTML
+server:
+  servlet:
+    context-path: /
+  port: 9999
