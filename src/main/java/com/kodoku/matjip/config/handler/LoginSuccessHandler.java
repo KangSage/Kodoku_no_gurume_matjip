@@ -23,8 +23,6 @@ public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessH
         ObjectMapper mapper = new ObjectMapper();
         ObjectNode objNode = mapper.createObjectNode();
         objNode.put("result", ResponseBodyResults.SUCCESS.getResult());
-        objNode.put("charEncTest", "헤헷");
-        objNode.put("헤헤", "헤헷");
         try (PrintWriter out = response.getWriter()) {
             out.print(objNode);
             out.flush();

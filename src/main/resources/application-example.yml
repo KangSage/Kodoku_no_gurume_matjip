@@ -7,9 +7,9 @@ spring:
         max-age: 0
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    username:
-    password:
-    url: jdbc:mysql://
+    username: kodoku
+    password: kodoku
+    url: jdbc:mysql://127.0.0.1:3306/kodoku
     type: com.zaxxer.hikari.HikariDataSource
   jpa:
     hibernate:
@@ -22,15 +22,15 @@ spring:
     database: mysql
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
     generate-ddl: true
-cloud:
-  aws:
-    stack:
-      auto: false
-    credentials:
-      access-key:
-      secret-key:
-    region:
-      static:
+#cloud:
+#  aws:
+#    stack:
+#      auto: false
+#    credentials:
+#      access-key:
+#      secret-key:
+#    region:
+#      static:
 logging:
   level:
     com.kodoku: debug

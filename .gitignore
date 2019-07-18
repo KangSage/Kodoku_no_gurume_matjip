@@ -305,5 +305,3 @@ build/test-results/
 src/main/generated/
 build/generated/
 src/main/resources/static/assets/package-lock.json
-et --mixed HEAD^
-src/main/resources/application-stage.yml
