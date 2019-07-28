@@ -44,7 +44,7 @@
 ### 2019-07-28
 
 * 로그인 실패 처리 코드 작성
-  * [LoginFailureHandler Class 구현](/blob/master/src/main/java/com/kodoku/matjip/config/handler/LoginFailureHandler.java)  
+  * [LoginFailureHandler Class 구현](/src/main/java/com/kodoku/matjip/config/handler/LoginFailureHandler.java)  
     * response.setStatus()를 사용하여 HTTP 상태 코드를 적용  
       로그인 실패 시 원인을 정확히 전달하도록 작성
     * 기존에 Spring Security에서 제공하는 클래스를 상속하지 않고 interface를 구현하는 방식으로 작성
