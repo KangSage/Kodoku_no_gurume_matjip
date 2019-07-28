@@ -37,21 +37,21 @@
 ### 2019-07-29
 
 * Lombok을 사용하여 코드 줄이기
-* Spring Bean 등록 Annotation의 종류 정확히 알고 사용하기
-  * [Annotation과 Bean](#https://lazymankook.tistory.com/27)
+* Spring Annotation의 종류 정확히 알고 사용하기
+  * [스프링부트 애노테이션 정리](https://jeong-pro.tistory.com/151)
+  * [Annotation과 Bean](https://lazymankook.tistory.com/27)
 
 ### 2019-07-28
 
 * 로그인 실패 처리 코드 작성
-  * response.setStatus()를 사용하여 HTTP 상태 코드를 적용  
-    로그인 실패 시 원인을 정확히 전달하도록 작성
-  * [LoginFailureHandler Class 구현](#/blob/master/src/main/java/com/kodoku/matjip/config/handler/LoginFailureHandler.java)  
-    * 기존에 Spring Security에서 제공하는 클래스를 상속받지 않고  
-      Interface를 구현하는 방식으로 작성
-      * Spring이 기본 제공하는 Login 관련 handler 클래스들은  
+  * [LoginFailureHandler Class 구현](/blob/master/src/main/java/com/kodoku/matjip/config/handler/LoginFailureHandler.java)  
+    * response.setStatus()를 사용하여 HTTP 상태 코드를 적용  
+      로그인 실패 시 원인을 정확히 전달하도록 작성
+    * 기존에 Spring Security에서 제공하는 클래스를 상속하지 않고 interface를 구현하는 방식으로 작성
+      * Spring이 기본 제공하는 로그인 관련 handler 클래스들은  
         redirect 또는 forward를 위한 handler이고 interface를 미리 구현해놓은 것으로  
-        페이지 이동을 server가 아닌 client에 맞기려는 컨셉에 적절하지 않아 직접 구현함
-      * response.getWriter를 사용하여 ajax 요청의 콜백 함수에 response body를 직접 전달
+        페이지 이동을 server가 아닌 client에 맞기려는 RestApi 컨셉에 적절하지 않아 직접 구현함
+      * response.getWriter()를 사용하여 ajax 요청의 콜백 함수에 response body를 직접 전달
       * 기존에 작성해둔 LoginSuccessHandler도 같은 방식으로 변경
     * 로그인 실패 상세 예외처리
       * 이메일과 비밀번호 중에 틀린 항목을 정확히 전달하는 방식으로 처리
