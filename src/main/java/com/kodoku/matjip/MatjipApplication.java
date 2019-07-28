@@ -18,15 +18,10 @@ import java.net.UnknownHostException;
 })
 @SpringBootApplication
 public class MatjipApplication {
-
-//    @Value("server.host.name")
-//    private String SERVER_HOST_NAME;
-
     public static void main(String[] args) {
         try {
             String IpAddr = InetAddress.getLocalHost().getHostAddress();
             log.info("Current Host IP Address : {}", IpAddr);
-//            log.info("Current active host name : {}");
         } catch (UnknownHostException e) {
             log.error(e.toString());
         }
