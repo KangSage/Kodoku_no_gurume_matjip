@@ -5,7 +5,7 @@ const getCookie = function(name) {
     return value ? value[2] : null;
 };
 
-/// AJAX 통신의 header에 csrf token을 설정한다.
+/// AJAX 통신의 header에 csrf token을 미리 설정한다.
 const setAjaxCsrfToken = () => {
     let csrfHeader = 'X-XSRF-TOKEN';
     let csrfToken = getCookie("XSRF-TOKEN");
@@ -35,7 +35,7 @@ $.fn.serializeObject = function () {
     return result
 };
 
-$['postSecJSON'] = (url, data) => {
+$['postJSON'] = (url, data) => {
     return $.ajax({
         url: url,
         type: 'POST',

@@ -1,4 +1,5 @@
 "use strict";
+
 $('#login-form').submit((e) => {
     e.preventDefault();
     const target = $(e.target);
@@ -8,7 +9,10 @@ $('#login-form').submit((e) => {
         result === 'success' ? location.href = '/html/user/list.html'
                              : location.reload();
     }).fail((err) => {
-        console.error(err);
-        Swal.fire('로그인 실패!', err.responseJSON.cause);
+        Swal.fire({
+            type: 'error',
+            title: '로그인 실패!',
+            text: err.responseJSON.message
+        });
     });
 });

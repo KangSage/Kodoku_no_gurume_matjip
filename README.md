@@ -34,15 +34,44 @@
 
 ## Daily log of Development
 
+### 2019-07-29
+
+* Lombok을 사용하여 코드 줄이기
+* Spring Bean 등록 Annotation의 종류 정확히 알고 사용하기
+  * [Annotation과 Bean](#https://lazymankook.tistory.com/27)
+
+### 2019-07-28
+
+* 로그인 실패 처리 코드 작성
+  * response.setStatus()를 사용하여 HTTP 상태 코드를 적용  
+    로그인 실패 시 원인을 정확히 전달하도록 작성
+  * [LoginFailureHandler Class 구현](#/blob/master/src/main/java/com/kodoku/matjip/config/handler/LoginFailureHandler.java)  
+    * 기존에 Spring Security에서 제공하는 클래스를 상속받지 않고  
+      Interface를 구현하는 방식으로 작성
+      * Spring이 기본 제공하는 Login 관련 handler 클래스들은  
+        redirect 또는 forward를 위한 handler이고 interface를 미리 구현해놓은 것으로  
+        페이지 이동을 server가 아닌 client에 맞기려는 컨셉에 적절하지 않아 직접 구현함
+      * response.getWriter를 사용하여 ajax 요청의 콜백 함수에 response body를 직접 전달
+      * 기존에 작성해둔 LoginSuccessHandler도 같은 방식으로 변경
+    * 로그인 실패 상세 예외처리
+      * 이메일과 비밀번호 중에 틀린 항목을 정확히 전달하는 방식으로 처리
+      * 회사 코드에 적용할 수 있을 것으로 보임
+  * 작동 환경에 따른 채널 보안 로직 적용
+    * Environment 객체의 현재 프로파일 정보에 따른 분기처리
+      * 현재 stage일 경우 모든 채널("/**")에 대하여 https로 강제 전환되도록 설정
+      * 차후 product가 생길 경우 변경 예정
+  * JS Library 정리
+    * SweetAlert2 Dark theme 사용
+
 ### 2019-07-22
 
-* Bootstrap 4.3, SweetAlert2 본격 적용 시작.  
-  * jQuery로 어디까지 만들고 React.js로 변경할 것인지 검토 중.
+* Bootstrap 4.3, SweetAlert2 본격 적용 시작  
+  * jQuery로 어디까지 만들고 React.js로 변경할 것인지 검토 중
 
 ### 2019-07-16
 
-* .gitignore 파일 작동 이상으로 .yml 파일이 remote repo에 push 됨.  
-  2번째 git 초기화로 인해 history가 전부 소멸됨.
+* .gitignore 파일 작동 이상으로 .yml 파일이 remote repo에 push 됨  
+  2번째 git 초기화로 인해 history가 전부 소멸됨
   .gitignore 파일이 제대로 작동하지 않을 경우에 대한 대책 -  
   https://projooni.tistory.com/entry/gitignore-%EC%A0%81%EC%9A%A9-%EC%95%88%EB%90%A0%EB%95%8C
 
@@ -84,17 +113,17 @@ private Instant updateDate;
 
 * Spring-data-jpa basic entity config
   * 로그인 로직을 위한 entity 정의, 자동 테이블 생성
-    * 테이블의 PK 컬럼에 기본 값을 랜덤 varchar type으로 입력하도록 구성.  
+    * 테이블의 PK 컬럼에 기본 값을 랜덤 varchar type으로 입력하도록 구성  
       자동 채번 기능인 MySQL의 auto increment를 사용하지 않고  
-      hibernate의 기능을 활용하여 varchar Type의 UUID로 발행.  
-    * 차후 다른 DB와 유저/멤버 테이블을 병합할 경우 확장성 용이.  
-    * 시간에 따른 정렬 기준은 등록일 / 변경일을 기준으로 할 것.
-  * schema 데이터 정렬 방식 utf8-general-ci로 임시 적용.  
+      hibernate의 기능을 활용하여 varchar Type의 UUID로 발행  
+    * 차후 다른 DB와 유저/멤버 테이블을 병합할 경우 확장성 용이  
+    * 시간에 따른 정렬 기준은 등록일 / 변경일을 기준으로 할 것
+  * schema 데이터 정렬 방식 utf8-general-ci로 임시 적용  
     MySQL 데이터 정렬 방식을 utf8mb4-unicode-ci로 할 경우  
     Specified key was too long; max key length is 767 bytes 에러 발생  
-    해결법을 검색해서 적용했으나 변화 없음.
-  * User Entity, Role Entity 적용.  
-    회원가입, 로그인 테스트 필요.
+    해결법을 검색해서 적용했으나 변화 없음
+  * User Entity, Role Entity 적용  
+    회원가입, 로그인 테스트 필요
 
 ### 2019-06-23
 
@@ -106,7 +135,7 @@ private Instant updateDate;
     > scoop update
     > scoop status
     > scoop install mysql56 mysql57
-    > sudo mysqld --install ## 반드시 관리자 권한으로 실행해야 함.
+    > sudo mysqld --install ## 반드시 관리자 권한으로 실행해야 함
   ```
   
   * MySQL 5.6 기준 DATABASE, TABLE, USER 설정  
@@ -129,15 +158,13 @@ private Instant updateDate;
     GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, INDEX, ALTER 
     ON [DATABASE NAME].'[TABLE NAME]' 
     TO '[USER NAME]'@'[ACCESS HOST]'; -- 특정 권한
-
-
   ```
 
   * 참조 : MySQL Windows에 수동 설치하기 -  
     http://www.itpaper.co.kr/window%EC%9A%A9-mysql-%EC%88%98%EB%8F%99-%EC%84%A4%EC%B9%98%ED%95%98%EA%B8%B0/  
 
   * 수동 설치 시 [Microsoft Visual C++ 2010 재배포 가능 패키지(x64)](https://www.microsoft.com/ko-kr/download/details.aspx?id=14632)를  
-    반드시 설치해야 mysqld를 실행 할 수 있다.  
+    반드시 설치해야 mysqld를 실행 할 수 있다  
 
 ### 2019-06-22
 
