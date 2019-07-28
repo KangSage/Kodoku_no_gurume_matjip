@@ -1,9 +1,13 @@
 package com.kodoku.matjip.config;
 
 import com.kodoku.matjip.service.serviceImpl.UserDetailServiceImpl;
+import lombok.AccessLevel;
+import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.service.spi.InjectService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.LockedException;
@@ -20,6 +24,7 @@ import javax.annotation.Resource;
 import java.util.Collection;
 
 @Slf4j
+@RequiredArgsConstructor(access = AccessLevel.PUBLIC, onConstructor_ = @Autowired)
 @ToString
 @Component
 public class CustomAuthProvider implements AuthenticationProvider {
@@ -29,10 +34,11 @@ public class CustomAuthProvider implements AuthenticationProvider {
     @Resource
     private PasswordEncoder passwordEncoder;
 
-    @Autowired
-    public CustomAuthProvider(UserDetailServiceImpl userDetailService) {
-        this.userDetailService = userDetailService;
-    }
+// Lombok @RequiredArgsConstructor로 대체
+//    @Autowired
+//    public CustomAuthProvider(UserDetailServiceImpl userDetailService) {
+//        this.userDetailService = userDetailService;
+//    }
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
@@ -70,5 +76,6 @@ public class CustomAuthProvider implements AuthenticationProvider {
     public boolean supports(Class<?> authentication) {
         return authentication.equals(UsernamePasswordAuthenticationToken.class);
     }
-
 }
+
+

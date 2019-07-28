@@ -1,10 +1,12 @@
 package com.kodoku.matjip.config;
 
-import com.kodoku.matjip.config.enums.ActiveProfiles;
+import com.kodoku.matjip.config.contants.Profiles;
 import com.kodoku.matjip.config.handler.LoginFailureHandler;
 import com.kodoku.matjip.config.handler.LoginSuccessHandler;
+import lombok.AccessLevel;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
+import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,29 +22,35 @@ import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.security.web.csrf.CsrfFilter;
 import org.springframework.web.filter.CharacterEncodingFilter;
 
+
 @Slf4j
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+    @Setter(value = AccessLevel.PUBLIC, onMethod_ = @Autowired)
     private Environment environment;
+
+    @Setter(value = AccessLevel.PUBLIC, onMethod_ = @Autowired)
     private CustomAuthProvider customAuthProvider;
 
-    @Autowired
-    public void setEnvironment(Environment environment) {
-        this.environment = environment;
-    }
-
-    @Autowired
-    public void setCustomAuthProvider(CustomAuthProvider customAuthProvider) {
-        this.customAuthProvider = customAuthProvider;
-    }
+// Lombok @Setter로 대체
+//    @Autowired
+//    public void setEnvironment(Environment environment) {
+//        this.environment = environment;
+//    }
+//    @Autowired
+//    public void setCustomAuthProvider(CustomAuthProvider customAuthProvider) {
+//        this.customAuthProvider = customAuthProvider;
+//    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         // ActiveProfiles에 stage가 포함될 경우 https 강제 옵션을 사용한다.
         for (String profile : environment.getActiveProfiles()) {
-            if (profile.toUpperCase().equals(ActiveProfiles.STAGE.name())) {
+            var upperProf = profile.toLowerCase();
+            if (upperProf.equals(Profiles.STAGE) || upperProf.equals(Profiles.PRODUCT)) {
+                log.info("All CHANNELS SECURITY APPLIES HTTPS");
                 http
                     .requiresChannel()
                     .antMatchers("/**")
