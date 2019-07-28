@@ -34,6 +34,18 @@
 
 ## Daily log of Development
 
+### 2019-07-22
+
+* Bootstrap 4.3, SweetAlert2 본격 적용 시작.  
+  * jQuery로 어디까지 만들고 React.js로 변경할 것인지 검토 중.
+
+### 2019-07-16
+
+* .gitignore 파일 작동 이상으로 .yml 파일이 remote repo에 push 됨.  
+  2번째 git 초기화로 인해 history가 전부 소멸됨.
+  .gitignore 파일이 제대로 작동하지 않을 경우에 대한 대책 -  
+  https://projooni.tistory.com/entry/gitignore-%EC%A0%81%EC%9A%A9-%EC%95%88%EB%90%A0%EB%95%8C
+
 ### 2019-07-11
 
 * Spring Security 설정 및 로그인 로직 작성  
@@ -104,6 +116,11 @@ private Instant updateDate;
     GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY '1111'; -- 모든 권한
     GRANT USAGE ON *.* TO '[ID]'@'[ACCESS HOST]' IDENTIFIED BY '[PASSWORD]'; -- 사용 권한
 
+    -- [CREATE DATABASE]
+    CREATE DATABASE [NEW DATABASE NAME]
+    DEFAULT CHARACTER SET UTF8
+    DEFAULT COLLATE UTF8_GENERAL_CI;
+  
     -- [CREATE USER]
     CREATE USER '[ID]'@'[ACCESS HOST]' IDENTIFIED BY '[PASSWORD]';
 
@@ -113,10 +130,7 @@ private Instant updateDate;
     ON [DATABASE NAME].'[TABLE NAME]' 
     TO '[USER NAME]'@'[ACCESS HOST]'; -- 특정 권한
 
-    -- [CREATE DATABASE]
-    CREATE DATABASE [NEW DATABASE NAME]
-    DEFAULT CHARACTER SET UTF8
-    DEFAULT COLLATE UTF8_GENERAL_CI;
+
   ```
 
   * 참조 : MySQL Windows에 수동 설치하기 -  

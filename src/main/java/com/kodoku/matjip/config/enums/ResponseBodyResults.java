@@ -8,7 +8,7 @@ import java.net.URL;
 public enum ResponseBodyResults {
 
     SUCCESS("success"),
-    FAIL("fail");
+    FAILURE("failure");
 
     @Getter
     private String result;
