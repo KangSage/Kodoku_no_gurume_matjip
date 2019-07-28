@@ -5,7 +5,8 @@ import lombok.Getter;
 public enum ActiveProfiles {
     LOCAL("local"),
     STAGE("stage"),
-    EXAMPLE("example");
+    EXAMPLE("example"),
+    PRODUCT("product");
 
     @Getter
     private String nameLowerCase;

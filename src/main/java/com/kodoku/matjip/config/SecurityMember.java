@@ -15,15 +15,10 @@ import java.util.List;
 import java.util.UUID;
 
 @Slf4j
-@Getter
-@Setter
-@ToString
-@EqualsAndHashCode(callSuper = false)
+@Getter @Setter @ToString @EqualsAndHashCode(callSuper = false)
 public class SecurityMember extends User {
 
     private UUID idx;
-//    private String active;
-//    private boolean accountNonLocked;
 
     /**
      * 로그인 정보를 세션에 담기 위한 객체를 생성한다.
@@ -34,13 +29,12 @@ public class SecurityMember extends User {
         this.idx = user.getIdx();
     }
 
-
     /**
      * user의 권한들을 모두 세션에 담는다.
      * @param roles DB에서 조회한 권한들
      * @return grantedAuthorities
      */
-    private static List<GrantedAuthority> makeGrantedAutority(List<Role> roles) {
+    private synchronized static List<GrantedAuthority> makeGrantedAutority(List<Role> roles) {
         List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
         roles.forEach(role -> grantedAuthorities.add(new SimpleGrantedAuthority(role.getRole())));
         return grantedAuthorities;

@@ -28,7 +28,7 @@ public class UserRegisterServiceImpl implements UserRegisterService {
 
     @Override
     @Transactional
-    public User addRegister(User user) {
+    public User userRegister(User user) {
         Role role = new Role();
         role.setRole("ROLE_USER");
         user.setRoles(Collections.singletonList(role));

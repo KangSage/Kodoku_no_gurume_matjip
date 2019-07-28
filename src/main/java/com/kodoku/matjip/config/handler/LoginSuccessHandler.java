@@ -20,8 +20,7 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
         response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
         // MediaType을 UTF8까지 해주면 별도로 해줄 필요가 없다.
         // response.setCharacterEncoding(StandardCharsets.UTF_8.name());
-        ObjectMapper mapper = new ObjectMapper();
-        ObjectNode objNode = mapper.createObjectNode();
+        ObjectNode objNode = new ObjectMapper().createObjectNode();
         objNode.put("result", ResponseBodyResults.SUCCESS.getResult());
         try (PrintWriter out = response.getWriter()) {
             out.print(objNode);

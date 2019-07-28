@@ -18,12 +18,10 @@ import java.io.PrintWriter;
 public class LoginFailureHandler implements AuthenticationFailureHandler {
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) {
-        log.info("exception: {}", exception.getMessage());
         response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
-        ObjectMapper mapper = new ObjectMapper();
-        ObjectNode objNode = mapper.createObjectNode();
         response.setStatus(HttpStatus.BAD_REQUEST.value());
-        objNode.put("cause", exception.getMessage());
+        ObjectNode objNode = new ObjectMapper().createObjectNode();
+        objNode.put("message", exception.getMessage());
         objNode.put("result", ResponseBodyResults.FAILURE.getResult());
         try (PrintWriter out = response.getWriter()) {
             out.print(objNode);
