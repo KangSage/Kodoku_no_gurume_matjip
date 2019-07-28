@@ -4,23 +4,34 @@
 
 ### Server side
 
-* JAVA 1.8
-* Spring Boot 2.1.6.RELEASE
+#### Corretto 8 - Production-ready distribution of the OpenJDK 8 created by Amazon
+
+#### Spring Boot 2.1.6.RELEASE
+
+* [Reference Doc.](https://docs.spring.io/spring-boot/docs/2.1.6.RELEASE/reference/html/)  
+* [API Doc.](https://docs.spring.io/spring-boot/docs/2.1.6.RELEASE/api/)
+* Use Spring Boot Starter Dependencies
   * spring-boot-starter-web
   * spring-boot-starter-data-jpa
   * spring-boot-starter-security
   * spring-boot-starter-oauth2-client
   * spring-boot-starter-websocket
-  * spring-boot-devtools
-* etc. Dependencies
-  * Lombok
-  * Querydsl
-* MySQL 5.6
+  * spring-boot-devtools  
+
+#### etc. Dependencies
+
+* [Lombok](https://projectlombok.org/features/all)  
+* [Querydsl](http://www.querydsl.com/) for JPA
+
+### Databases
+
+* MySQL 5.6.x Latest
+* Redis
 
 ### Client side
 
 * First step using HTML / CSS / jQuery for web.
-* Second step using React Native or Vue Native for iOS / Android apps. 
+* Second step using React Native or Vue Native for iOS / Android apps.
 
 ### Development Environment
 
@@ -29,7 +40,7 @@
   * Visual Studio Code
   * Eclipse 2019-06 & STS 4.3.0 (Spare)
 * OS
-  * Local dev laptop : Windows 10 
+  * Local dev laptop : Windows 10
   * Stage server : Amazon Linux AMI 2018.03.0.20190611 x86_64 HVM gp2
 
 ## Daily log of Development
@@ -70,10 +81,9 @@
 
 ### 2019-07-16
 
-* .gitignore 파일 작동 이상으로 .yml 파일이 remote repo에 push 됨  
-  2번째 git 초기화로 인해 history가 전부 소멸됨
-  .gitignore 파일이 제대로 작동하지 않을 경우에 대한 대책 -  
-  https://projooni.tistory.com/entry/gitignore-%EC%A0%81%EC%9A%A9-%EC%95%88%EB%90%A0%EB%95%8C
+* .gitignore 파일 작동 이상으로 .yml 파일이 remote repo에 push되어
+  2번째 git 초기화로 인해 history가 전부 소멸됨  
+* [.gitignore 파일이 제대로 작동하지 않을 경우에 대한 대책](https://projooni.tistory.com/entry/gitignore-%EC%A0%81%EC%9A%A9-%EC%95%88%EB%90%A0%EB%95%8C)
 
 ### 2019-07-11
 
@@ -101,13 +111,11 @@ private Instant updateDate;
 ```
 
 * EC2 Linux를 통한 ElastiCache 접속하기
-  * 클러스터 노드에 연결하는 법 -  
-  https://docs.aws.amazon.com/ko_kr/AmazonElastiCache/latest/red-ug/GettingStarted.ConnectToCacheNode.html
+  * [클러스터 노드에 연결하는 법](https://docs.aws.amazon.com/ko_kr/AmazonElastiCache/latest/red-ug/GettingStarted.ConnectToCacheNode.html)
 
 * Git
   * 실수로 인한 AWS Credential info file push - .git remove and rebase
-  * 좋은 git 커밋 메시지를 작성하기 위한 8가지 약속 -  
-     https://djkeh.github.io/articles/How-to-write-a-git-commit-message-kor/
+  * [좋은 git 커밋 메시지를 작성하기 위한 8가지 약속](https://djkeh.github.io/articles/How-to-write-a-git-commit-message-kor/)
 
 ### 2019-06-27
 
@@ -141,7 +149,7 @@ private Instant updateDate;
   * MySQL 5.6 기준 DATABASE, TABLE, USER 설정  
   
   ``` mysql
-    -- [USER PASSWORD UPDATE]    
+    -- [USER PASSWORD UPDATE]
     GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY '1111'; -- 모든 권한
     GRANT USAGE ON *.* TO '[ID]'@'[ACCESS HOST]' IDENTIFIED BY '[PASSWORD]'; -- 사용 권한
 
@@ -155,13 +163,12 @@ private Instant updateDate;
 
     -- [권한 설정]
     GRANT ALL ON [DATABASE NAME].'[TABLE NAME]' TO '[USER NAME]'@'[ACCESS HOST]';  -- 모든 권한
-    GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, INDEX, ALTER 
-    ON [DATABASE NAME].'[TABLE NAME]' 
+    GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, INDEX, ALTER
+    ON [DATABASE NAME].'[TABLE NAME]'
     TO '[USER NAME]'@'[ACCESS HOST]'; -- 특정 권한
   ```
 
-  * 참조 : MySQL Windows에 수동 설치하기 -  
-    http://www.itpaper.co.kr/window%EC%9A%A9-mysql-%EC%88%98%EB%8F%99-%EC%84%A4%EC%B9%98%ED%95%98%EA%B8%B0/  
+  * 참조 : [MySQL Windows에 수동 설치하기](http://www.itpaper.co.kr/window%EC%9A%A9-mysql-%EC%88%98%EB%8F%99-%EC%84%A4%EC%B9%98%ED%95%98%EA%B8%B0)  
 
   * 수동 설치 시 [Microsoft Visual C++ 2010 재배포 가능 패키지(x64)](https://www.microsoft.com/ko-kr/download/details.aspx?id=14632)를  
     반드시 설치해야 mysqld를 실행 할 수 있다  
@@ -170,8 +177,6 @@ private Instant updateDate;
 
 * Amazon Linux AMI 인스턴스 생성  
 * Windows 10 Power Shell SSH 접속  
-  * Windows 10 에서 pem 파일을 사용하기 – https://swiftcoding.org/lightsail-from-window10
-  * 사용 권한 변경 중에 부모 권한 상속 에러 발생 해결 -  
-    https://m.blog.naver.com/PostView.nhn?blogId=crehacktive3&logNo=220991428540&proxyReferer=https%3A%2F%2Fwww.google.com%2F 
-* Amazon Linux AMI를 사용하여 LAMP 웹 서버 설치
-https://docs.aws.amazon.com/ko_kr/AWSEC2/latest/UserGuide/install-LAMP.html
+  * [Windows 10 에서 pem 파일을 사용하기](https://swiftcoding.org/lightsail-from-window10)
+  * [사용 권한 변경 중에 부모 권한 상속 에러 발생 해결](https://m.blog.naver.com/PostView.nhn?blogId=crehacktive3&logNo=220991428540&proxyReferer=https%3A%2F%2Fwww.google.com%2F)
+* [Amazon Linux AMI를 사용하여 LAMP 웹 서버 설치](https://docs.aws.amazon.com/ko_kr/AWSEC2/latest/UserGuide/install-LAMP.html)
