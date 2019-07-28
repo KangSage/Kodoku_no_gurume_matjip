@@ -4,28 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link type="text/css" rel="stylesheet" href="/assets/node_modules/bootstrap/dist/css/bootstrap.min.css">
-    <title>Index</title>
+    <link type="text/css" rel="stylesheet" href="/assets/node_modules/sweetalert2/dist/sweetalert2.min.css">
+    <title class="">Login</title>
 </head>
 <body>
-<form id="login-form" method="post" action="/j_spring_security_check">
-    <div class="row">
+<!--login form begin-->
+<form class="form" id="login-form" method="post" action="/j_spring_security_check">
+    <div class="row form-group">
         <div class="col">
             <label for="email">email</label>
             <input class="form-control" id="email" type="email" name="email" placeholder="please input email"/>
+            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
         </div>
     </div>
-    <div class="row">
+    <div class="row form-group">
         <div class="col">
             <label for="password">password</label>
             <input class="form-control" id="password" type="password" name="password" placeholder="please input email"/>
         </div>
     </div>
-    <button class="btn" id="login-btn" type="submit">login in</button>
+    <div class="form-group form-check">
+        <input type="checkbox" class="form-check-input" id="remember-me">
+        <label class="form-check-label" for="remember-me">remember me</label>
+    </div>
+    <button class="btn btn-dark" id="login-btn" type="submit">login in</button>
 </form>
-<a id="sign-up" href="sign-up.html">sign up</a>
+<!--login form end-->
+<div>
+    <a class="btn btn-info" type="button" id="sign-up" href="sign-up.html">sign up</a>
+</div>
 <script src="/assets/node_modules/jquery/dist/jquery.min.js"></script>
 <script src="/assets/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="/assets/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
 <script src="/assets/js/common.js"></script>
 <script src="login.js"></script>
 </body>

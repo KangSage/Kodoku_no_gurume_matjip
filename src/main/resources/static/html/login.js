@@ -5,9 +5,10 @@ $('#login-form').submit((e) => {
     const url = target[0].action;
     const data = target.serialize();
     $.post(url, data, 'JSON').done(({result}) => {
-    result === 'success' ? location.href = '/html/user/list.html'
-                         : location.reload();
+        result === 'success' ? location.href = '/html/user/list.html'
+                             : location.reload();
     }).fail((err) => {
-        console.log(err);
+        console.error(err);
+        Swal.fire('로그인 실패!', err.responseJSON.cause);
     });
 });
