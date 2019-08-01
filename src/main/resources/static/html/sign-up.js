@@ -1,13 +1,8 @@
 /**
  * arrow func's this = window object
  */
-"use strict";
-
+'use strict';
 let $signUpForm = $('#sign-up-form');
-
-$(document).ready(() => {
-    setAjaxCsrfToken();
-});
 
 $signUpForm.submit((e) => {
     e.preventDefault();
