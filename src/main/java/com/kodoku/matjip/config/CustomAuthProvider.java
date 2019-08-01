@@ -1,13 +1,11 @@
 package com.kodoku.matjip.config;
 
-import com.kodoku.matjip.service.serviceImpl.UserDetailServiceImpl;
+import com.kodoku.matjip.service.serviceImpl.UserDetailsServiceImpl;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
-import org.hibernate.service.spi.InjectService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.LockedException;
@@ -16,6 +14,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -24,12 +23,12 @@ import javax.annotation.Resource;
 import java.util.Collection;
 
 @Slf4j
-@RequiredArgsConstructor(access = AccessLevel.PUBLIC, onConstructor_ = @Autowired)
+@RequiredArgsConstructor(access = AccessLevel.PUBLIC/*, onConstructor_ = @Autowired*/)
 @ToString
 @Component
 public class CustomAuthProvider implements AuthenticationProvider {
 
-    private final UserDetailServiceImpl userDetailService;
+    private final UserDetailsService userDetailService;
 
     @Resource
     private PasswordEncoder passwordEncoder;

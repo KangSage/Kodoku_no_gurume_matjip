@@ -1,13 +1,15 @@
 package com.kodoku.matjip.config;
 
 import com.kodoku.matjip.config.contants.Profiles;
-import com.kodoku.matjip.config.handler.LoginFailureHandler;
-import com.kodoku.matjip.config.handler.LoginSuccessHandler;
-import lombok.AccessLevel;
+import com.kodoku.matjip.config.handler.CustomLoginFailureHandler;
+import com.kodoku.matjip.config.handler.CustomLoginSuccessHandler;
+import com.kodoku.matjip.config.handler.CustomLogoutSuccessHandler;
+import com.kodoku.matjip.service.serviceImpl.UserDetailsServiceImpl;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
@@ -15,12 +17,20 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
+import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
+import org.springframework.security.web.authentication.rememberme.TokenBasedRememberMeServices;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.security.web.csrf.CsrfFilter;
+import org.springframework.security.web.session.HttpSessionEventPublisher;
 import org.springframework.web.filter.CharacterEncodingFilter;
+
+import java.nio.charset.StandardCharsets;
 
 
 @Slf4j
@@ -28,11 +38,20 @@ import org.springframework.web.filter.CharacterEncodingFilter;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Setter(value = AccessLevel.PUBLIC, onMethod_ = @Autowired)
+    @Value("${custom.remember-me.enckey}")
+    String REMEMBER_ME_ENC_KEY;
+
+    @Value("${custom.remember-me.remember-me-cookie-key}")
+    String REMEMBER_ME_COOKIE_KEY;
+
+    @Setter(onMethod_ = @Autowired)
     private Environment environment;
 
-    @Setter(value = AccessLevel.PUBLIC, onMethod_ = @Autowired)
+    @Setter(onMethod_ = @Autowired)
     private CustomAuthProvider customAuthProvider;
+
+    @Setter(onMethod_ = @Autowired)
+    UserDetailsService userDetailsService;
 
 // Lombok @Setter로 대체
 //    @Autowired
@@ -46,7 +65,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        // ActiveProfiles에 stage가 포함될 경우 https 강제 옵션을 사용한다.
+        // ActiveProfiles에 stage 또는 product가 포함될 경우 https 강제 옵션을 사용한다.
         for (String profile : environment.getActiveProfiles()) {
             var upperProf = profile.toLowerCase();
             if (upperProf.equals(Profiles.STAGE) || upperProf.equals(Profiles.PRODUCT)) {
@@ -58,10 +77,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 break;
             }
         }
-
         http
             .authorizeRequests()
-                .antMatchers("/j_spring_security_check", "/user/register", "/html/*", "/assets/**", "/actuator/**").permitAll()
+                .antMatchers("/", "/j_spring_security_check", "/user/register", "/html/*", "/assets/**", "/actuator/**").permitAll()
                 .antMatchers("/admin/**", "/html/admin/**").hasAnyRole("ADMIN")
                 .antMatchers("/user/**", "/html/user/**").hasAnyRole("USER")
                 .anyRequest()
@@ -76,20 +94,25 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .and()
                 .formLogin()
                 .loginPage("/html/login.html")
-                .loginPage("/admin-login.html")
+                .loginPage("/html/admin-login.html")
                 .loginProcessingUrl("/j_spring_security_check")
                 .usernameParameter("email")
                 .passwordParameter("password")
-                .successHandler(getLoginSuccessHandler())
-                .failureHandler(getLoginFailureHandler())
+                .successHandler(this.getLoginSuccessHandler())
+                .failureHandler(this.getLoginFailureHandler())
             .and()
                 .logout()
-                .logoutUrl("/logout")
-                .logoutSuccessUrl("/")
-                .deleteCookies("JSESSIONID", "J_REMEMBER_ME")
+                .logoutUrl("/j_security_logout").permitAll()
+                .logoutSuccessHandler(this.getLogoutSuccessHandler())
+                .deleteCookies("JSESSIONID", REMEMBER_ME_COOKIE_KEY)
                 .invalidateHttpSession(true)
             .and()
-                .addFilterBefore(getCharEncFilter(), CsrfFilter.class)
+                .rememberMe()
+                .key(REMEMBER_ME_ENC_KEY) // default: uuid random -> some times provider can't read these value, please set constant value
+                .rememberMeServices(this.getTokenBasedRememberMeServices())
+                .tokenValiditySeconds(60 * 60 * 24 * 14)
+            .and()
+                .addFilterBefore(this.getCharEncFilter(), CsrfFilter.class)
                 .csrf()
                     .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
                     .ignoringAntMatchers("/j_spring_security_check");
@@ -101,22 +124,49 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
+    public HttpSessionEventPublisher addSessionListener() {
+        return new HttpSessionEventPublisher();
+    }
+
+    @Bean
     public PasswordEncoder getPasswordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
     @Bean
     public CharacterEncodingFilter getCharEncFilter() {
-        return new CharacterEncodingFilter();
+         CharacterEncodingFilter charEncFilter = new CharacterEncodingFilter();
+         charEncFilter.setEncoding(StandardCharsets.UTF_8.name());
+         charEncFilter.setForceEncoding(true);
+        return charEncFilter;
     }
 
     @Bean
-    public LoginSuccessHandler getLoginSuccessHandler() {
-        return new LoginSuccessHandler();
+    public TokenBasedRememberMeServices getTokenBasedRememberMeServices() {
+        TokenBasedRememberMeServices rememberMeServices = new TokenBasedRememberMeServices(REMEMBER_ME_ENC_KEY, userDetailsService);
+        log.debug("Remember me param: {}", rememberMeServices.getParameter());
+        rememberMeServices.setAlwaysRemember(false);
+        rememberMeServices.setTokenValiditySeconds(60 * 60 * 24 * 14);
+        rememberMeServices.setCookieName(REMEMBER_ME_COOKIE_KEY);
+        return rememberMeServices;
     }
 
     @Bean
-    public LoginFailureHandler getLoginFailureHandler() {
-        return new LoginFailureHandler();
+    public CustomAuthProvider addCustomAuthProvider() {
+        return new CustomAuthProvider(userDetailsService);
     }
+
+    private AuthenticationSuccessHandler getLoginSuccessHandler() {
+        return new CustomLoginSuccessHandler();
+    }
+
+    private AuthenticationFailureHandler getLoginFailureHandler() {
+        return new CustomLoginFailureHandler();
+    }
+
+    private LogoutSuccessHandler getLogoutSuccessHandler() {
+        return new CustomLogoutSuccessHandler();
+    }
+
+
 }
