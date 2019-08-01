@@ -55,17 +55,17 @@
 ### 2019-07-28
 
 * 로그인 실패 처리 코드 작성
-  * [LoginFailureHandler Class 구현](/src/main/java/com/kodoku/matjip/config/handler/LoginFailureHandler.java)  
+  * [CustomLoginFailureHandler Class 구현](/src/main/java/com/kodoku/matjip/config/handler/CustomLoginFailureHandler.java)  
     * response.setStatus()를 사용하여 HTTP 상태 코드를 적용  
       로그인 실패 시 원인을 정확히 전달하도록 작성
     * 기존에 Spring Security에서 제공하는 클래스를 상속하지 않고 interface를 구현하는 방식으로 작성
       * Spring이 기본 제공하는 로그인 관련 handler 클래스들은  
         redirect 또는 forward를 위한 handler이고 interface를 미리 구현해놓은 것으로  
-        페이지 이동을 server가 아닌 client에 맞기려는 RestApi 컨셉에 적절하지 않아 직접 구현함
+        페이지 이동을 server가 아닌 client에 맡기려는 Rest API 컨셉에 적절하지 않아 직접 구현함
       * response.getWriter()를 사용하여 ajax 요청의 콜백 함수에 response body를 직접 전달
       * 기존에 작성해둔 LoginSuccessHandler도 같은 방식으로 변경
     * 로그인 실패 상세 예외처리
-      * 이메일과 비밀번호 중에 틀린 항목을 정확히 전달하는 방식으로 처리
+      * 이메일과 비밀번호 중에 틀린 항목을 정확히 전달하도록 변경
       * 회사 코드에 적용할 수 있을 것으로 보임
   * 작동 환경에 따른 채널 보안 로직 적용
     * Environment 객체의 현재 프로파일 정보에 따른 분기처리

@@ -2,10 +2,7 @@ package com.kodoku.matjip.config.enums;
 
 import lombok.Getter;
 
-import java.net.MalformedURLException;
-import java.net.URL;
-
-public enum ResponseBodyResults {
+public enum ResponseBodyResult {
 
     SUCCESS("success"),
     FAILURE("failure");
@@ -13,7 +10,7 @@ public enum ResponseBodyResults {
     @Getter
     private String result;
 
-    ResponseBodyResults(String result) {
+    ResponseBodyResult(String result) {
         this.result = result;
     }
 

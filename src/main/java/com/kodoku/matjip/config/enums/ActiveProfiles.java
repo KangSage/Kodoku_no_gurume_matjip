@@ -9,9 +9,9 @@ public enum ActiveProfiles {
     PRODUCT("product");
 
     @Getter
-    private String nameLowerCase;
+    private String lowerCaseName;
 
     ActiveProfiles(String profile) {
-        this.nameLowerCase = profile;
+        this.lowerCaseName = profile;
     }
 }

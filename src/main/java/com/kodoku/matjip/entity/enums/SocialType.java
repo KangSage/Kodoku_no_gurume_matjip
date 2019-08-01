@@ -10,26 +10,14 @@ public enum SocialType {
     LINE("line"),
     GENERAL("general");
 
-    private final String ROLE_PRIFIX = "ROLE_";
-    private String name;
-    StringBuilder strBuilder = new StringBuilder();
+    private String socialName;
 
-    SocialType(String name) {
-        this.name = name;
+    SocialType(String socialName) {
+        this.socialName = socialName;
     }
 
-    public String getRoleType() {
-        strBuilder.append(ROLE_PRIFIX).append(name.toUpperCase());
-        return strBuilder.toString();
+    public String getSocialName() {
+        return socialName;
     }
-
-    public String getValue() {
-        return name;
-    }
-
-    public boolean isEquals(String authority) {
-        return this.getRoleType().equals(authority);
-    }
-
 
 }
