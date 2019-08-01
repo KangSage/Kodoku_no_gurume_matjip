@@ -45,6 +45,21 @@
 
 ## Daily log of Development
 
+### 2019-08-02
+
+* Remember me 기능 추가
+  * Spring Security의 자동 로그인 기능 활성화
+    * 기본은 UUID로 쿠키의 값이 인코딩되므로 .rememberMe().key() 메서드에 반드시  
+      encode key를 할당해야 로직이 정상 작동함
+    * 토큰 기반의 Remember me 기능을 위한 TokenBasedRememberMeServices 객체를  
+      rememberMeServices()에 Bean 등록하여 넣어준다
+      * 항상 기억할 것인지(boolean), 토큰 유효 기한(int sec), 쿠키의 이름등을 지정할 수 있다
+    
+  * Security의 세션이 생성/소멸되는 것을 확인하기 위한 리스너 등록.
+    * Session의 Create/Destroy 이벤트에 각각 필요한 비즈니스 로직을 [구현](/src/main/java/com/kodoku/matjip/config/listener)하고
+      HttpSessionEventPublisher 클래스를 @Bean으로 등록한다.
+  * 자동 로그인 기능 체크를 위한 [login.html](/src/main/resources/static/html/login.html)의 check box 태그 생성
+
 ### 2019-07-29
 
 * Lombok을 사용하여 코드 줄이기

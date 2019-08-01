@@ -124,7 +124,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public HttpSessionEventPublisher addSessionListener() {
+    public HttpSessionEventPublisher addSessionEventListener() {
         return new HttpSessionEventPublisher();
     }
 

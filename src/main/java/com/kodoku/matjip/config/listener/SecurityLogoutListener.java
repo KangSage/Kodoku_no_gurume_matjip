@@ -12,17 +12,17 @@ import java.util.List;
 
 @Slf4j
 @Component
-public class LogoutListener implements ApplicationListener<SessionDestroyedEvent> {
+public class SecurityLogoutListener implements ApplicationListener<SessionDestroyedEvent> {
     @Override
     public void onApplicationEvent(SessionDestroyedEvent event) {
         String korZonedTime = ModernTimeUtil.getZonedTime(event.getTimestamp(), "yyyy-MM-dd HH:mm:ss z","Asia/Seoul");
-        log.debug("Session destroyed event start: {}", korZonedTime);
+        log.debug("Security session destroyed event start: {}", korZonedTime);
         List<SecurityContext> securityContextList = event.getSecurityContexts();
         UserDetails userDetails;
         for (SecurityContext securityContext : securityContextList) {
             userDetails = (UserDetails) securityContext.getAuthentication().getPrincipal();
-            log.debug("Session destroyed username: {}", userDetails.getUsername());
-            log.debug("Session destroyed user role: {}", userDetails.getAuthorities());
+            log.debug("Security session destroyed username: {}", userDetails.getUsername());
+            log.debug("Security session destroyed user role: {}", userDetails.getAuthorities());
         }
     }
 }
