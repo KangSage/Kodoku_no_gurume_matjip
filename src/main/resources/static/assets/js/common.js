@@ -6,15 +6,13 @@ const getCookie = function(name) {
 };
 
 /// AJAX 통신의 header에 csrf token을 미리 설정한다.
-const setAjaxCsrfToken = () => {
-    let csrfHeader = 'X-XSRF-TOKEN';
-    let csrfToken = getCookie("XSRF-TOKEN");
-    $.ajaxSetup({
-        beforeSend : (jqxhr) => {
-            jqxhr.setRequestHeader(csrfHeader, csrfToken);
-        }
-    });
-};
+let csrfHeader = 'X-XSRF-TOKEN';
+let csrfToken = getCookie("XSRF-TOKEN");
+$.ajaxSetup({
+    beforeSend: (jqxhr) => {
+        jqxhr.setRequestHeader(csrfHeader, csrfToken);
+    }
+});
 
 $.fn.serializeObject = function () {
     "use strict";

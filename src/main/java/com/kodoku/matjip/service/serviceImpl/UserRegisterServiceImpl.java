@@ -2,6 +2,7 @@ package com.kodoku.matjip.service.serviceImpl;
 
 import com.kodoku.matjip.entity.Role;
 import com.kodoku.matjip.entity.User;
+import com.kodoku.matjip.entity.enums.RoleType;
 import com.kodoku.matjip.repository.UserRepository;
 import com.kodoku.matjip.service.UserRegisterService;
 import lombok.extern.slf4j.Slf4j;
@@ -30,7 +31,7 @@ public class UserRegisterServiceImpl implements UserRegisterService {
     @Transactional
     public User userRegister(User user) {
         Role role = new Role();
-        role.setRole("ROLE_USER");
+        role.setRole(RoleType.ROLE_USER.name());
         user.setRoles(Collections.singletonList(role));
         user.setPassword(passwordEncoder.encode(user.getPassword()));
        return userRepository.save(user);

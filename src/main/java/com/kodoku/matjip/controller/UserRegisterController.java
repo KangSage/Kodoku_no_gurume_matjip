@@ -1,13 +1,9 @@
 package com.kodoku.matjip.controller;
 
-import com.kodoku.matjip.config.enums.ResponseBodyResults;
+import com.kodoku.matjip.config.enums.ResponseBodyResult;
 import com.kodoku.matjip.entity.User;
 import com.kodoku.matjip.service.UserRegisterService;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.tomcat.util.ExceptionUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,7 +27,7 @@ public class UserRegisterController {
         Map<String, Object> body = new HashMap<>();
         try {
             userRegisterService.userRegister(user);
-            body.put("result", ResponseBodyResults.SUCCESS.getResult());
+            body.put("result", ResponseBodyResult.SUCCESS.getResult());
             return ResponseEntity.ok().body(body);
         } catch (Exception e) {
             body.put("body", e);
