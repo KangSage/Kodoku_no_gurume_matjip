@@ -56,7 +56,7 @@
       * 항상 기억할 것인지(boolean), 토큰 유효 기한(int sec), 쿠키의 이름등을 지정할 수 있다
     
   * Security의 세션이 생성/소멸되는 것을 확인하기 위한 리스너 등록.
-    * Session의 Create/Destroy 이벤트에 각각 필요한 비즈니스 로직을 [구현](/src/main/java/com/kodoku/matjip/config/listener)하고
+    * Session의 Create/Destroy 이벤트에 각각 필요한 비즈니스 로직을 [구현](/src/main/java/com/kodoku/matjip/config/listener)하고  
       HttpSessionEventPublisher 클래스를 @Bean으로 등록한다.
   * 자동 로그인 기능 체크를 위한 [login.html](/src/main/resources/static/html/login.html)의 check box 태그 생성
 

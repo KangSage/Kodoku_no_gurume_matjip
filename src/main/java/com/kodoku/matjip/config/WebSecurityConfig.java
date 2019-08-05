@@ -5,6 +5,7 @@ import com.kodoku.matjip.config.handler.CustomLoginFailureHandler;
 import com.kodoku.matjip.config.handler.CustomLoginSuccessHandler;
 import com.kodoku.matjip.config.handler.CustomLogoutSuccessHandler;
 import com.kodoku.matjip.service.serviceImpl.UserDetailsServiceImpl;
+import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import lombok.var;
@@ -67,8 +68,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         // ActiveProfiles에 stage 또는 product가 포함될 경우 https 강제 옵션을 사용한다.
         for (String profile : environment.getActiveProfiles()) {
-            var upperProf = profile.toLowerCase();
-            if (upperProf.equals(Profiles.STAGE) || upperProf.equals(Profiles.PRODUCT)) {
+            var lowerProf = profile.toLowerCase();
+            if (lowerProf.equals(Profiles.STAGE) || lowerProf.equals(Profiles.PRODUCT)) {
                 log.info("All CHANNELS SECURITY APPLIES HTTPS");
                 http
                     .requiresChannel()
@@ -102,7 +103,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .failureHandler(this.getLoginFailureHandler())
             .and()
                 .logout()
-                .logoutUrl("/j_security_logout").permitAll()
+                .logoutUrl("/j_spring_security_logout").permitAll()
                 .logoutSuccessHandler(this.getLogoutSuccessHandler())
                 .deleteCookies("JSESSIONID", REMEMBER_ME_COOKIE_KEY)
                 .invalidateHttpSession(true)
@@ -144,7 +145,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public TokenBasedRememberMeServices getTokenBasedRememberMeServices() {
         TokenBasedRememberMeServices rememberMeServices = new TokenBasedRememberMeServices(REMEMBER_ME_ENC_KEY, userDetailsService);
-        log.debug("Remember me param: {}", rememberMeServices.getParameter());
         rememberMeServices.setAlwaysRemember(false);
         rememberMeServices.setTokenValiditySeconds(60 * 60 * 24 * 14);
         rememberMeServices.setCookieName(REMEMBER_ME_COOKIE_KEY);
