@@ -25,7 +25,7 @@
 
 ### Databases
 
-* MySQL 5.6.x Latest
+* ~~MySQL 5.6.x Latest~~ ->  MySQL 5.7.x Latest (2019-12-29)
 * Redis
 
 ### Client side
@@ -44,6 +44,15 @@
   * Stage server : Amazon Linux AMI 2018.03.0.20190611 x86_64 HVM gp2
 
 ## Daily log of Development
+
+### 2019-12-29
+* 개인 프로젝트 다시 시작
+* Front-end React.js를 사용한 SPA로 제작 예정
+* Back-end는 일단 스프링으로 유지.
+
+* MySQL 5.7.x로 업데이트
+  * [HomeBrew를 사용하여 설치](https://github.com/helloheesu/SecretlyGreatly/wiki/%EB%A7%A5%EC%97%90%EC%84%9C-mysql-%EC%84%A4%EC%B9%98-%ED%9B%84-%ED%99%98%EA%B2%BD%EC%84%A4%EC%A0%95%ED%95%98%EA%B8%B0)
+
 
 ### 2019-08-02
 
