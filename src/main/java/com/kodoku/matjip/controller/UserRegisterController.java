@@ -12,28 +12,29 @@ import java.util.Map;
 
 @Slf4j
 @RestController
-@RequestMapping(value = "/user", method = {RequestMethod.GET, RequestMethod.POST})
+@RequestMapping(
+    value = "/user",
+    method = {RequestMethod.GET, RequestMethod.POST})
 public class UserRegisterController {
 
-    // @Autowired를 사용하지 않고 생성자로 주입받아 사용한다.
-    private final UserRegisterService userRegisterService;
+  // @Autowired를 사용하지 않고 생성자로 주입받아 사용한다.
+  private final UserRegisterService userRegisterService;
 
-    public UserRegisterController(UserRegisterService userRegisterService) {
-        this.userRegisterService = userRegisterService;
+  public UserRegisterController(UserRegisterService userRegisterService) {
+    this.userRegisterService = userRegisterService;
+  }
+
+  @PostMapping(value = "/register")
+  public ResponseEntity<Map<String, Object>> userRegister(@RequestBody User user) {
+    Map<String, Object> body = new HashMap<>();
+    try {
+      userRegisterService.userRegister(user);
+      body.put("result", ResponseBodyResult.SUCCESS.getResult());
+      return ResponseEntity.ok().body(body);
+    } catch (Exception e) {
+      body.put("body", e);
+      log.error("error : ", e);
+      return ResponseEntity.badRequest().body(body);
     }
-
-    @PostMapping(value ="/register")
-    public ResponseEntity<Map<String, Object>> userRegister(@RequestBody User user) {
-        Map<String, Object> body = new HashMap<>();
-        try {
-            userRegisterService.userRegister(user);
-            body.put("result", ResponseBodyResult.SUCCESS.getResult());
-            return ResponseEntity.ok().body(body);
-        } catch (Exception e) {
-            body.put("body", e);
-            log.error("error : ", e);
-            return ResponseEntity.badRequest().body(body);
-        }
-    }
-
+  }
 }

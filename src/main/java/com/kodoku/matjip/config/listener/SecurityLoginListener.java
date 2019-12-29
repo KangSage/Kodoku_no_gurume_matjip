@@ -11,11 +11,13 @@ import javax.servlet.http.HttpSession;
 @Slf4j
 @Component
 public class SecurityLoginListener implements ApplicationListener<SessionCreationEvent> {
-    @Override
-    public void onApplicationEvent(SessionCreationEvent event) {
-        String korZonedTime = ModernTimeUtil.getZonedTime(event.getTimestamp(), "yyyy-MM-dd HH:mm:ss z","Asia/Seoul");
-        log.debug("Security session Creation event start: {}", korZonedTime);
-        HttpSession session = (HttpSession) event.getSource();
-        log.debug("Security created session timeout: {}", session.getServletContext().getSessionTimeout());
-    }
+  @Override
+  public void onApplicationEvent(SessionCreationEvent event) {
+    String korZonedTime =
+        ModernTimeUtil.getZonedTime(event.getTimestamp(), "yyyy-MM-dd HH:mm:ss z", "Asia/Seoul");
+    log.debug("Security session Creation event start: {}", korZonedTime);
+    HttpSession session = (HttpSession) event.getSource();
+    log.debug(
+        "Security created session timeout: {}", session.getServletContext().getSessionTimeout());
+  }
 }

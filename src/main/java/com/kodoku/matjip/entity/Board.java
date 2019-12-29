@@ -1,4 +1,3 @@
 package com.kodoku.matjip.entity;
 
-public class Board {
-}
+public class Board {}

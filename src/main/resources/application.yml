@@ -31,6 +31,6 @@ server:
   port: 8080
 # 이하는 상수
 custom:
-    remember-me:
-      enckey: kodoku
-      remember-me-cookie-key: KODOKU_REMEMBER_ME
+  remember-me:
+    enckey: kodoku
+    remember-me-cookie-key: KODOKU_REMEMBER_ME

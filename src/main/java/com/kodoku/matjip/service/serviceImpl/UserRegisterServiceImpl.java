@@ -18,22 +18,23 @@ import java.util.Collections;
 @Service
 public class UserRegisterServiceImpl implements UserRegisterService {
 
-    private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
+  private final UserRepository userRepository;
+  private final PasswordEncoder passwordEncoder;
 
-    @Autowired
-    public UserRegisterServiceImpl(UserRepository userRepository, @Lazy PasswordEncoder passwordEncoder) {
-        this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
-    }
+  @Autowired
+  public UserRegisterServiceImpl(
+      UserRepository userRepository, @Lazy PasswordEncoder passwordEncoder) {
+    this.userRepository = userRepository;
+    this.passwordEncoder = passwordEncoder;
+  }
 
-    @Override
-    @Transactional
-    public User userRegister(User user) {
-        Role role = new Role();
-        role.setRole(RoleType.ROLE_USER.name());
-        user.setRoles(Collections.singletonList(role));
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-       return userRepository.save(user);
-    }
+  @Override
+  @Transactional
+  public User userRegister(User user) {
+    Role role = new Role();
+    role.setRole(RoleType.ROLE_USER.name());
+    user.setRoles(Collections.singletonList(role));
+    user.setPassword(passwordEncoder.encode(user.getPassword()));
+    return userRepository.save(user);
+  }
 }

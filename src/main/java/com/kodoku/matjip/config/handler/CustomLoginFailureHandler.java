@@ -16,18 +16,19 @@ import java.io.PrintWriter;
 
 @Slf4j
 public class CustomLoginFailureHandler implements AuthenticationFailureHandler {
-    @Override
-    public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) {
-        response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
-        response.setStatus(HttpStatus.UNAUTHORIZED.value());
-        ObjectNode objNode = new ObjectMapper().createObjectNode();
-        objNode.put("message", exception.getMessage());
-        objNode.put("result", ResponseBodyResult.FAILURE.getResult());
-        try (PrintWriter out = response.getWriter()) {
-            out.print(objNode);
-            out.flush();
-        } catch (IOException e) {
-            log.error("", e);
-        }
+  @Override
+  public void onAuthenticationFailure(
+      HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) {
+    response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
+    response.setStatus(HttpStatus.UNAUTHORIZED.value());
+    ObjectNode objNode = new ObjectMapper().createObjectNode();
+    objNode.put("message", exception.getMessage());
+    objNode.put("result", ResponseBodyResult.FAILURE.getResult());
+    try (PrintWriter out = response.getWriter()) {
+      out.print(objNode);
+      out.flush();
+    } catch (IOException e) {
+      log.error("", e);
     }
+  }
 }

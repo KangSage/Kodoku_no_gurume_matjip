@@ -15,17 +15,17 @@ import java.util.Collection;
 @Controller
 public class MainPageController {
 
-    @GetMapping(value= "/")
-    public String redirectMainPage(@AuthenticationPrincipal SecurityMember securityMember) {
-        String _forwardUrl = "redirect:/login.html";
-        if (SecurityContextHolder.getContext().getAuthentication().getPrincipal() != "anonymousUser") {
-            Collection<? extends GrantedAuthority> authorities = securityMember.getAuthorities();
-            for (GrantedAuthority auth : authorities) {
-                log.debug("auth.getAuthority(): {}", auth.getAuthority());
-                _forwardUrl = "redirect:" + RoleType.valueOf(auth.getAuthority()).getForwardUrl();
-                break;
-            }
-        }
-        return _forwardUrl;
+  @GetMapping(value = "/")
+  public String redirectMainPage(@AuthenticationPrincipal SecurityMember securityMember) {
+    String _forwardUrl = "redirect:/login.html";
+    if (SecurityContextHolder.getContext().getAuthentication().getPrincipal() != "anonymousUser") {
+      Collection<? extends GrantedAuthority> authorities = securityMember.getAuthorities();
+      for (GrantedAuthority auth : authorities) {
+        log.debug("auth.getAuthority(): {}", auth.getAuthority());
+        _forwardUrl = "redirect:" + RoleType.valueOf(auth.getAuthority()).getForwardUrl();
+        break;
+      }
     }
+    return _forwardUrl;
+  }
 }
