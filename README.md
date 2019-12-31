@@ -49,66 +49,68 @@
 
 - VSCode Spring Boot 개발환경 구축
 
-  - Extensions 설치
+![VS Code로 Spring Boot Project 실행 성공!](readme-images/STS-in-VSCode.png)
 
-    - Java Extension Pack - 기본적인 Java 개발을 도와주는 확장
+- Extensions 설치
 
-      - Language Support for Java(TM) by Red Hat
-      - Debugger for Java
-      - Java Test Runner
-      - Maven for java
-      - Java Dependency Viewer
-      - Visual Studio IntelliCode
+  - Java Extension Pack - 기본적인 Java 개발을 도와주는 확장
 
-    - Spring Boot Extension Pack - Spring 개발을 도와주는 확장
+    - Language Support for Java(TM) by Red Hat
+    - Debugger for Java
+    - Java Test Runner
+    - Maven for java
+    - Java Dependency Viewer
+    - Visual Studio IntelliCode
 
-      - Spring Boot Tools
-      - Cloudfoundry Manifest YML Support
-      - Concourse CI Pipeline Editor
-      - Spring Initializr Java Support
-      - Spring Boot Dashboard
+  - Spring Boot Extension Pack - Spring 개발을 도와주는 확장
 
-    - Gradle Extension Pack - Gradle 사용을 도와주는 확장
+    - Spring Boot Tools
+    - Cloudfoundry Manifest YML Support
+    - Concourse CI Pipeline Editor
+    - Spring Initializr Java Support
+    - Spring Boot Dashboard
 
-      - Gradle Language Support
-      - Gradle Tasks
+  - Gradle Extension Pack - Gradle 사용을 도와주는 확장
 
-    - Lombok Annotations Support for VS Code - Lombok 사용을 위한 확장
+    - Gradle Language Support
+    - Gradle Tasks
 
-  - Extensions 설정
+  - Lombok Annotations Support for VS Code - Lombok 사용을 위한 확장
 
-    - Settings : Search settings를 활용하여 설정한다.
+- Extensions 설정
 
-      - JAVA / Gradle Home 설정
+  - Settings : Search settings를 활용하여 설정한다.
 
-        - .vscode/setting.json
+    - JAVA / Gradle Home 설정
 
-          ```json
-            {
-              ...,
-              "java.home": "/Users/ksh/.jenv/versions/openjdk64-1.8.0.222",
-              "java.import.gradle.home": "/usr/local/bin/gradle",
-              "java.import.gradle.version": "6.0.1",
-            }
-          ```
+      - .vscode/setting.json
 
-      - Spring Boot Run Active Profiles 설정 : 아직까진 IDEA / STS 4에 비해 부족함.
-
-        - .vscode/launch.json
-
-          ```json
+        ```json
           {
-            "configurations": [
-                {
-                  ...,
-                          // 읽어들일 yml / properties 파일의 변수를 넣어준다.
-                  "args":"--spring.profiles.active=local"
-                }
-              ]
+            ...,
+            "java.home": "/Users/ksh/.jenv/versions/openjdk64-1.8.0.222",
+            "java.import.gradle.home": "/usr/local/bin/gradle",
+            "java.import.gradle.version": "6.0.1",
           }
-          ```
+        ```
 
-      - [Java Formatter on Save Settings](https://github.com/redhat-developer/vscode-java/wiki/Formatter-settings) - Goggle Styles
+    - Spring Boot Run Active Profiles 설정 : 아직까진 IDEA / STS 4에 비해 부족함.
+
+      - .vscode/launch.json
+
+        ```json
+        {
+          "configurations": [
+              {
+                ...,
+                        // 읽어들일 yml / properties 파일의 변수를 넣어준다.
+                "args":"--spring.profiles.active=local"
+              }
+            ]
+        }
+        ```
+
+    - [Java Formatter on Save Settings](https://github.com/redhat-developer/vscode-java/wiki/Formatter-settings) - Goggle Styles
 
 ### 2019-12-29
 
