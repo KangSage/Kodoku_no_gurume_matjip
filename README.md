@@ -45,6 +45,46 @@
 
 ## Daily log of Development
 
+### 2019-12-31
+
+- VSCode Spring Boot 개발환경 구축
+  - Extensions 설치
+      - Java Extension Pack
+        - Language Support for Java(TM) by Red Hat
+        - Debugger for Java
+        - Java Test Runner
+        - Maven for java
+        - Java Dependency Viewer
+        - Visual Studio IntelliCode
+      - Spring Boot Extension Pack
+        - Spring Boot Tools
+        - Cloudfoundry Manifest YML Support
+        - Concourse CI Pipeline Editor
+        - Spring Initializr Java Support
+        - Spring Boot Dashboard
+      - Gradle Extension Pack
+        - Gradle Language Support
+        - Gradle Tasks
+      - Lombok Annotations Support for VS Code
+  - Extensions 설정
+     - Settings : Search settings를 활용하여 설정한다.
+        - JAVA / Gradle Home 설정
+        - Spring Boot Run Active Profiles 설정 : 아직까진 IDEA / STS4에 비해 부족함.
+          - .vscode/launch.json
+          ```json
+            {
+              "configurations": [
+                {
+                  ...,
+                  "args":"--spring.profiles.active=local"
+                }
+              ]
+          
+            } 
+          ```
+          
+        
+
 ### 2019-12-29
 
 - 개인 프로젝트 다시 시작
