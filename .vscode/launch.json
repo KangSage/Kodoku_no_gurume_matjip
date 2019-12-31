@@ -1,0 +1,14 @@
+{
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Spring Boot-MatjipApplication<matjip>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "console": "internalConsole",
+      "mainClass": "com.kodoku.matjip.MatjipApplication",
+      "projectName": "matjip",
+      "args": "--spring.profiles.active=local"
+    }
+  ]
+}
