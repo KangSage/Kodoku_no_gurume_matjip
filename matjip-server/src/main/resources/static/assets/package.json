@@ -1,0 +1,14 @@
+{
+  "name": "yeassets",
+  "version": "1.0.0",
+  "description": "Spring boot static resources management",
+  "main": "index.js",
+  "author": "KangSH",
+  "license": "MIT",
+  "dependencies": {
+    "@sweetalert2/themes": "^2.0.3",
+    "bootstrap": "^4.3.1",
+    "jquery": "^3.4.1",
+    "sweetalert2": "^8.14.0"
+  }
+}
