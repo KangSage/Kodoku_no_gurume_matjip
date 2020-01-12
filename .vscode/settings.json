@@ -8,16 +8,5 @@
   "java.import.gradle.home": "/usr/local/bin/gradle",
   "java.home": "/Users/ksh/.jenv/versions/openjdk64-1.8.0.222",
   "java.codeGeneration.generateComments": true,
-  "sqltools.connections": [
-    {
-      "database": "kodoku",
-      "dialect": "MySQL",
-      "name": "Matjip DB - Local",
-      "password": "Kodoku20201!",
-      "port": 3306,
-      "server": "localhost",
-      "username": "kodoku"
-    }
-  ],
   "java.configuration.updateBuildConfiguration": "interactive"
 }
