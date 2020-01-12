@@ -1,15 +1,15 @@
 # Personal Project - Restaurants in 'Kodoku no gurume'
 
-## Technology stack to be used (planned)
+## Technology stack to be used (planned) - Latest update 2020-01-12
 
 ### Server side
 
 #### Corretto 8 - Production-ready distribution of the OpenJDK 8 created by Amazon
 
-#### Spring Boot 2.1.6.RELEASE
+#### Spring Boot 2.2.2.RELEASE
 
-- [Reference Doc.](https://docs.spring.io/spring-boot/docs/2.1.6.RELEASE/reference/html/)
-- [API Doc.](https://docs.spring.io/spring-boot/docs/2.1.6.RELEASE/api/)
+- [Reference Doc.](https://docs.spring.io/spring-boot/docs/2.2.2.RELEASE/reference/html/)
+- [API Doc.](https://docs.spring.io/spring-boot/docs/2.2.2.RELEASE/api/)
 - Use Spring Boot Starter Dependencies
   - spring-boot-starter-web
   - spring-boot-starter-data-jpa
@@ -30,16 +30,50 @@
 
 ### Client side
 
-- First step using HTML / CSS / jQuery for web.
-- Second step using React Native or Vue Native for iOS / Android apps.
+- ~~First step using HTML / CSS / jQuery for Web browser.~~
+- React SPA for Web browser.
+- Next step using React Native or Flutter iOS & Android apps.
+
+#### React.js
+
+- Use Create React App with Typescript
+
+  ```zsh
+  npx create-react-app [project name] --typescript
+  ```
+
+  - @testing-library/jest-dom
+  - @testing-library/react
+  - @testing-library/user-event
+  - @types/jest
+  - @types/node
+  - @types/react
+  - @types/react-dom
+  - react
+  - react-dom
+  - react-scripts
+  - typescript
+
+- etc. Dependencies
+
+  ```zsh
+  yarn add styled-components @types/styled-components @material-ui/core
+  ```
+
+  - @material-ui/core
+  - @types/styled-components
+  - styled-components
 
 ### Development Environment
 
 - IDE
+
   - IntelliJ IDEA Ultimate
-  - Visual Studio Code
-  - Eclipse & STS (Spare)
+  - [Visual Studio Code with Java Extensions](#2019-12-31)
+  - ~~Eclipse & STS~~ (not recommended for development experience)
+
 - OS
+
   - Local dev laptop : ~~Windows 10~~ -> macOS Catalina 10.15.x
   - Stage server : Amazon Linux AMI 2018.03.0.20190611 x86_64 HVM gp2
 
@@ -53,7 +87,15 @@
       - 다행스럽게도 4.x에서 5.x로 업데이트 될 때에 비해 변경된 부분이 적음.
   - Client : Spring Boot 내부의 Static HTML에서  
     별도의 리액트 클라이언트 어플리케이션 프로젝트로 분리
-    - CRA로 개발 시작 예정
+    - Create React App을 사용하여 개발 시작
+    - Typescript 적용
+      - Typescript 기본 지원 라이브러리의 경우 index.d.ts라는 파일이 존재하므로  
+        따로 typescript 의존성을 설치할 필요는 없으나 지원하지 않을 경우  
+        라이브러리명 앞에 '@type/'를 붙여서 추가해야한다.
+    - Apply Dependencies
+      - @material-ui/core
+      - styled-components
+        - @types/styled-components
 
 ### 2019-12-31
 
