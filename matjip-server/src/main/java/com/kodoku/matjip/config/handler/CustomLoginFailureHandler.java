@@ -13,13 +13,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
 
 @Slf4j
 public class CustomLoginFailureHandler implements AuthenticationFailureHandler {
   @Override
-  public void onAuthenticationFailure(
-      HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) {
-    response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
+  public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
+      AuthenticationException exception) {
+    response.setContentType(MediaType.APPLICATION_JSON_VALUE);
+    response.setCharacterEncoding(StandardCharsets.UTF_8.name());
     response.setStatus(HttpStatus.UNAUTHORIZED.value());
     ObjectNode objNode = new ObjectMapper().createObjectNode();
     objNode.put("message", exception.getMessage());

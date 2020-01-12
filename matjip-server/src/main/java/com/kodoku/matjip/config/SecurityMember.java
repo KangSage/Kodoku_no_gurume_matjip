@@ -29,7 +29,7 @@ public class SecurityMember extends User {
    * @param user email과 password가 확인된 사용자 객체
    */
   public SecurityMember(com.kodoku.matjip.entity.User user) {
-    super(user.getEmail(), user.getPassword(), makeGrantedAutority(user.getRoles()));
+    super(user.getEmail(), user.getPassword(), makeGrantedAuthority(user.getRoles()));
     this.idx = user.getIdx();
   }
 
@@ -39,7 +39,7 @@ public class SecurityMember extends User {
    * @param roles DB에서 조회한 권한들
    * @return grantedAuthorities
    */
-  private static synchronized List<GrantedAuthority> makeGrantedAutority(List<Role> roles) {
+  private static synchronized List<GrantedAuthority> makeGrantedAuthority(List<Role> roles) {
     List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
     roles.forEach(role -> grantedAuthorities.add(new SimpleGrantedAuthority(role.getRole())));
     return grantedAuthorities;
