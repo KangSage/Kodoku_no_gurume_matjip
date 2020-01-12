@@ -1,15 +1,15 @@
 # Personal Project - Restaurants in 'Kodoku no gurume'
 
-## Technology stack to be used (planned)
+## Technology stack to be used (planned) - Latest update 2020-01-12
 
 ### Server side
 
 #### Corretto 8 - Production-ready distribution of the OpenJDK 8 created by Amazon
 
-#### Spring Boot 2.1.6.RELEASE
+#### Spring Boot 2.2.2.RELEASE
 
-- [Reference Doc.](https://docs.spring.io/spring-boot/docs/2.1.6.RELEASE/reference/html/)
-- [API Doc.](https://docs.spring.io/spring-boot/docs/2.1.6.RELEASE/api/)
+- [Reference Doc.](https://docs.spring.io/spring-boot/docs/2.2.2.RELEASE/reference/html/)
+- [API Doc.](https://docs.spring.io/spring-boot/docs/2.2.2.RELEASE/api/)
 - Use Spring Boot Starter Dependencies
   - spring-boot-starter-web
   - spring-boot-starter-data-jpa
@@ -30,20 +30,72 @@
 
 ### Client side
 
-- First step using HTML / CSS / jQuery for web.
-- Second step using React Native or Vue Native for iOS / Android apps.
+- ~~First step using HTML / CSS / jQuery for Web browser.~~
+- React SPA for Web browser.
+- Next step using React Native or Flutter iOS & Android apps.
+
+#### React.js
+
+- Use Create React App with Typescript
+
+  ```zsh
+  npx create-react-app [project name] --typescript
+  ```
+
+  - @testing-library/jest-dom
+  - @testing-library/react
+  - @testing-library/user-event
+  - @types/jest
+  - @types/node
+  - @types/react
+  - @types/react-dom
+  - react
+  - react-dom
+  - react-scripts
+  - typescript
+
+- etc. Dependencies
+
+  ```zsh
+  yarn add styled-components @types/styled-components @material-ui/core
+  ```
+
+  - @material-ui/core
+  - @types/styled-components
+  - styled-components
 
 ### Development Environment
 
 - IDE
+
   - IntelliJ IDEA Ultimate
-  - Visual Studio Code
-  - Eclipse & STS (Spare)
+  - [Visual Studio Code with Java Extensions](#2019-12-31)
+  - ~~Eclipse & STS~~ (not recommended for development experience)
+
 - OS
+
   - Local dev laptop : ~~Windows 10~~ -> macOS Catalina 10.15.x
   - Stage server : Amazon Linux AMI 2018.03.0.20190611 x86_64 HVM gp2
 
 ## Daily log of Development
+
+### 2019-01-11
+
+- Server와 Client 분리 개발 시작
+  - Server : Spring Boot GA버전이 업데이트 되어 최신 버전으로 업데이트.
+    - 그레이들 버전도 6.x로 업데이트 되어 같이 적용.
+      - 다행스럽게도 4.x에서 5.x로 업데이트 될 때에 비해 변경된 부분이 적음.
+  - Client : Spring Boot 내부의 Static HTML에서  
+    별도의 리액트 클라이언트 어플리케이션 프로젝트로 분리
+    - Create React App을 사용하여 개발 시작
+    - Typescript 적용
+      - Typescript 기본 지원 라이브러리의 경우 index.d.ts라는 파일이 존재하므로  
+        따로 typescript 의존성을 설치할 필요는 없으나 지원하지 않을 경우  
+        라이브러리명 앞에 '@type/'를 붙여서 추가해야한다.
+    - Apply Dependencies
+      - @material-ui/core
+      - styled-components
+        - @types/styled-components
 
 ### 2019-12-31
 
@@ -142,9 +194,9 @@
       - 항상 기억할 것인지(boolean), 토큰 유효 기한(int sec), 쿠키의 이름등을 지정할 수 있다
 
   - Security의 세션이 생성/소멸되는 것을 확인하기 위한 리스너 등록.
-    - Session의 Create/Destroy 이벤트에 각각 필요한 비즈니스 로직을 [구현](/src/main/java/com/kodoku/matjip/config/listener)하고  
+    - Session의 Create/Destroy 이벤트에 각각 필요한 비즈니스 로직을 [구현](/matjip-server/src/main/java/com/kodoku/matjip/config/listener)하고  
       HttpSessionEventPublisher 클래스를 @Bean으로 등록한다.
-  - 자동 로그인 기능 체크를 위한 [login.html](/src/main/resources/static/html/login.html)의 check box 태그 생성
+  - 자동 로그인 기능 체크를 위한 [login.html](/matjip-server/src/main/resources/static/html/login.html)의 check box 태그 생성
 
 ### 2019-07-29
 
@@ -156,7 +208,7 @@
 ### 2019-07-28
 
 - 로그인 실패 처리 코드 작성
-  - [CustomLoginFailureHandler Class 구현](/src/main/java/com/kodoku/matjip/config/handler/CustomLoginFailureHandler.java)
+  - [CustomLoginFailureHandler Class 구현](/matjip-server/src/main/java/com/kodoku/matjip/config/handler/CustomLoginFailureHandler.java)
     - response.setStatus()를 사용하여 HTTP 상태 코드를 적용  
       로그인 실패 시 원인을 정확히 전달하도록 작성
     - 기존에 Spring Security에서 제공하는 클래스를 상속하지 않고 interface를 구현하는 방식으로 작성

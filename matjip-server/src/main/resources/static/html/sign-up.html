@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link type="text/css" rel="stylesheet"
+          href="/assets/node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet"
+          href="/assets/node_modules/@sweetalert2/themes/dark/dark.css">
+    <title>Sign up</title>
+</head>
+<body>
+<form id="sign-up-form" action="/user/register">
+    <!--    <input id="idx" type="text"  name="idx"/>-->
+    <div class="row">
+        <div class="col">
+            <label for="email">email</label>
+            <input class="form-control" id="email" type="email" name="email"
+                   placeholder="please input email"/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <label for="password">password</label>
+            <input class="form-control" id="password" type="password"
+                   name="password" placeholder="PW"/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <label for="first-name">이름</label>
+            <input id="first-name" type="text" name="firstName"/>
+        </div>
+        <div class="col">
+            <label for="last-name">성</label>
+            <input id="last-name" type="text" name="lastName"/>
+        </div>
+    </div>
+    <input id="social-type" type="hidden" name="socialType" value="GENERAL">
+    <button class="btn-info" id="sign-up-btn" type="submit">sign up</button>
+</form>
+<script type="application/javascript"
+        src="/assets/node_modules/jquery/dist/jquery.min.js"></script>
+<script type="application/javascript"
+        src="/assets/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+<script type="application/javascript"
+        src="/assets/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/node_modules/sweetalert2/dist/sweetalert2.min.js"></script>
+<script type="application/javascript" src="/assets/js/common.js"></script>
+<script type="application/javascript" src="sign-up.js"></script>
+</body>
+</html>

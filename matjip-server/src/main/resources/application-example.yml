@@ -1,0 +1,38 @@
+spring:
+  resources:
+    cache:
+      cachecontrol:
+        no-cache: true
+        no-store: true
+        max-age: 0
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: kodoku
+    password: kodoku
+    url: jdbc:mysql://127.0.0.1:3306/kodoku?characterEncoding=UTF-8&serverTimezone=UTC
+    type: com.zaxxer.hikari.HikariDataSource
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    open-in-view: true
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    generate-ddl: true
+#cloud:
+#  aws:
+#    stack:
+#      auto: false
+#    credentials:
+#      access-key:
+#      secret-key:
+#    region:
+#      static:
+logging:
+  level:
+    com.kodoku: debug
+server:
+  port: 5000
