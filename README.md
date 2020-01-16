@@ -79,7 +79,21 @@
 
 ## Daily log of Development
 
-### 2019-01-11
+### 2020-01-16
+
+- homebrew로 설치한 mysql@5.7의 패스워드를 분실했을 경우 대처법
+  - 출처: [stack overflow : MacOSX homebrew mysql root password](https://stackoverflow.com/questions/9695362/macosx-homebrew-mysql-root-password)
+
+```shellscript
+brew services stop mysql@5.7
+pkill mysqld
+rm -rf /usr/local/var/mysql/ # NOTE: this will delete your existing database!!!
+brew postinstall mysql@5.7
+brew services restart mysql@5.7
+mysql -u root
+```
+
+### 2020-01-11
 
 - Server와 Client 분리 개발 시작
   - Server : Spring Boot GA버전이 업데이트 되어 최신 버전으로 업데이트.
