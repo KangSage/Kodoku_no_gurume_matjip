@@ -79,6 +79,10 @@
 
 ## Daily log of Development
 
+### 2020-01-22
+
+- S
+
 ### 2020-01-16
 
 - homebrew로 설치한 mysql@5.7의 패스워드를 분실했을 경우 대처법

@@ -27,6 +27,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     if (user == null) {
       throw new UsernameNotFoundException("이메일을 찾을 수 없습니다.");
     }
+    log.debug("user: {}", user);
     return new SecurityMember(user);
   }
 }

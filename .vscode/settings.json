@@ -6,7 +6,7 @@
     "**/.factorypath": true
   },
   "java.import.gradle.home": "/usr/local/bin/gradle",
-  "java.home": "/Users/ksh/.jenv/versions/openjdk64-1.8.0.222",
+  "java.home": "/Users/ksh/.jenv/versions/openjdk64-1.8.0.242",
   "java.codeGeneration.generateComments": true,
   "java.configuration.updateBuildConfiguration": "interactive"
 }

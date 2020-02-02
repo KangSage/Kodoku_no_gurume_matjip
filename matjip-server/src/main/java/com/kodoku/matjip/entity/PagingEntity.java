@@ -1,8 +1,9 @@
 package com.kodoku.matjip.entity;
 
+import java.io.Serializable;
 import javax.persistence.Transient;
 
-public class PagingEntity {
-  @Transient Long startPage;
-  @Transient Long finishPage;
+public interface PagingEntity extends Serializable {
+  @Transient Long startPage = 1L;
+  @Transient Long finishPage = 10L;
 }

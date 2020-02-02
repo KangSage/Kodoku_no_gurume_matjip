@@ -1,0 +1,20 @@
+
+###
+GET {{host}}:{{port}}/html/user/list.html
+Accept: application/json
+
+###
+POST {{host}}:{{port}}/j_spring_security_check
+Content-Type: application/x-www-form-urlencoded
+
+email=ksage@knou.ac.kr&password=wmfqnpfr451!
+
+###
+GET {{host}}:{{port}}/csrf-token
+Accept: application/json
+
+###
+GET {{host}}:{{port}}/json-web-token
+Accept: application/json
+
+###

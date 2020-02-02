@@ -5,13 +5,14 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.net.InetAddress;
-import java.net.UnknownHostException;
+import org.springframework.boot.autoconfigure.thymeleaf.ThymeleafAutoConfiguration;
 
 @Slf4j
-@SpringBootApplication
+@SpringBootApplication(exclude = {ThymeleafAutoConfiguration.class})
 public class MatjipApplication {
 
   public static void main(String[] args) {
+
     try {
       String ipAddr = InetAddress.getLocalHost().getHostAddress();
       log.debug(
@@ -19,7 +20,7 @@ public class MatjipApplication {
               + "  Local:            http://localhost:8080\n"
               + "  On Your Network:  http://{}:8080",
           ipAddr);
-    } catch (UnknownHostException e) {
+    } catch (Exception e) {
       log.error(e.toString());
     }
     SpringApplication.run(MatjipApplication.class, args);

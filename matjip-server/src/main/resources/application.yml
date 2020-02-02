@@ -15,14 +15,15 @@ spring:
     open-in-view: true
     database: mysql
   thymeleaf:
-    prefix: classpath:templates/
-    suffix: .html
-    cache: false
-    check-template: true
-    check-template-location: true
-    enabled: true
-    encoding: UTF-8
-    mode: HTML
+    enabled: false
+#    prefix: classpath:templates/
+#    suffix: .html
+#    cache: false
+#    check-template: true
+#    check-template-location: true
+#    enabled: true
+#    encoding: UTF-8
+#    mode: HTML
 server:
   servlet:
     context-path: /

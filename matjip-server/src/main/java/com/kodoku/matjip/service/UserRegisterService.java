@@ -5,5 +5,5 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface UserRegisterService {
-  User userRegister(User user) throws Exception;
+  void userRegister(User user) throws Exception;
 }

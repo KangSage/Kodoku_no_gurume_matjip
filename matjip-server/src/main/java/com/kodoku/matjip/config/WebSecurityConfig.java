@@ -4,6 +4,7 @@ import com.kodoku.matjip.config.contants.Profiles;
 import com.kodoku.matjip.config.handler.CustomLoginFailureHandler;
 import com.kodoku.matjip.config.handler.CustomLoginSuccessHandler;
 import com.kodoku.matjip.config.handler.CustomLogoutSuccessHandler;
+import java.nio.charset.StandardCharsets;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import lombok.var;
@@ -26,10 +27,9 @@ import org.springframework.security.web.authentication.logout.LogoutSuccessHandl
 import org.springframework.security.web.authentication.rememberme.TokenBasedRememberMeServices;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.security.web.csrf.CsrfFilter;
+import org.springframework.security.web.csrf.CsrfTokenRepository;
 import org.springframework.security.web.session.HttpSessionEventPublisher;
 import org.springframework.web.filter.CharacterEncodingFilter;
-
-import java.nio.charset.StandardCharsets;
 
 @Slf4j
 @Configuration
@@ -94,6 +94,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         .addFilterBefore(this.getCharEncFilter(), CsrfFilter.class).csrf()
         .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
         .ignoringAntMatchers("/j_spring_security_check");
+  }
+
+  @Bean
+  public CsrfTokenRepository getCookieCsrfTokenRepo() {
+    return new CookieCsrfTokenRepository();
   }
 
   @Override

@@ -41,22 +41,22 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-websocket'
-    implementation 'de.codecentric:spring-boot-admin-starter-client'
-    implementation 'de.codecentric:spring-boot-admin-starter-server'
+    // implementation 'de.codecentric:spring-boot-admin-starter-client'
+    // implementation 'de.codecentric:spring-boot-admin-starter-server'
     // implementation 'org.springframework.cloud:spring-cloud-starter-aws'
 
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     runtimeOnly 'mysql:mysql-connector-java'
-    
+
     // annotationProcessor 'com.querydsl:querydsl-apt'
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
     annotationProcessor 'org.projectlombok:lombok'
-    
+
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation('org.springframework.boot:spring-boot-starter-test') {
-        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
-    }
+//    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+//        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+//    }
     testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
     testImplementation 'org.springframework.security:spring-security-test'
 

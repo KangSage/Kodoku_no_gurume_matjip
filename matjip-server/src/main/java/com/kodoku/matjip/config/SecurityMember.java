@@ -1,26 +1,27 @@
 package com.kodoku.matjip.config;
 
 import com.kodoku.matjip.entity.Role;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-
-@Slf4j
 @Getter
 @Setter
 @ToString
 @EqualsAndHashCode(callSuper = false)
 public class SecurityMember extends User {
 
+  /**
+   *
+   */
+  private static final long serialVersionUID = -351884844165510144L;
   private UUID idx;
 
   /**
@@ -39,8 +40,8 @@ public class SecurityMember extends User {
    * @param roles DB에서 조회한 권한들
    * @return grantedAuthorities
    */
-  private static synchronized List<GrantedAuthority> makeGrantedAuthority(List<Role> roles) {
-    List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
+  private static synchronized Set<GrantedAuthority> makeGrantedAuthority(Set<Role> roles) {
+    Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
     roles.forEach(role -> grantedAuthorities.add(new SimpleGrantedAuthority(role.getRole())));
     return grantedAuthorities;
   }
