@@ -305,3 +305,13 @@ build/test-results/
 src/main/generated/
 build/generated/
 src/main/resources/static/assets/package-lock.json
+matjip-client/.idea/$CACHE_FILE$
+matjip-client/.idea/compiler.xml
+matjip-client/.idea/inspectionProfiles/Project_Default.xml
+matjip-client/.idea/dictionaries/ksh.xml
+matjip-client/.idea/vcs.xml
+matjip-client/.idea/saveactions_settings.xml
+matjip-client/.idea/modules.xml
+matjip-client/.idea/misc.xml
+matjip-client/.idea/google-java-format.xml
+matjip-client/.idea/encodings.xml
