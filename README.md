@@ -79,9 +79,11 @@
 
 ## Daily log of Development
 
-### 2020-01-22
+### 2020-02-09
 
-- S
+- jenv로 JAVA_HOME이 설정되지 않는 문제 발생
+  - 2014년부터 지속된 이슈 - plugin export를 활성화 하는 것으로 문제 해결
+    - [jenv plugin 활성화 문제 해결](https://github.com/jenv/jenv/issues/44#issuecomment-561921906)
 
 ### 2020-01-16
 
